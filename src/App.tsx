@@ -8,26 +8,33 @@ const MTGHPTracker = () => {
   // Voice options for the dropdown
   const voiceOptions = [
     { value: 'default', label: 'Default' },
-    { value: 'warrior', label: 'Warrior' },
-    { value: 'mage', label: 'Mage' },
-    { value: 'beast', label: 'Beast' },
-    { value: 'ethereal', label: 'Ethereal' }
+    { value: 'original', label: 'Original' }
   ];
 
+  const playSound = (soundType: string) => {
+    try {
+      const audio = new Audio(`/sounds/${selectedVoice}_${soundType}.mp3`);
+      audio.volume = 0.7; // Adjust volume as needed
+      audio.play().catch(err => console.log('Audio play failed:', err));
+    } catch (error) {
+      console.log('Error playing sound:', error);
+    }
+  };
+  
   const increaseHP = () => {
     setHP(prev => prev + 1);
     // replace console.log with "life" sound
-    console.log(`Playing heal sound for ${selectedVoice} voice`);
+    playSound('heal');
   };
 
   const decreaseHP = () => {
     setHP(prev => Math.max(0, prev - 1)); // Prevent negative HP
     // replace console.log with "dsmage" sound
-    console.log(`Playing damage sound for ${selectedVoice} voice`);
+    playSound('damage');
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
+    <div className="min-h-screen min-w-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
       <div className="bg-black/40 backdrop-blur-sm rounded-2xl border border-purple-500/30 p-8 shadow-2xl">
         <div className="flex items-center justify-center gap-8">
           {/* Voice Selector */}
