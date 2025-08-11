@@ -8,7 +8,11 @@ const MTGHPTracker = () => {
   // Voice options for the dropdown
   const voiceOptions = [
     { value: 'default', label: 'Default' },
-    { value: 'original', label: 'Original' }
+    { value: 'original', label: 'Original' },
+    { value: 'mario', label: 'Mario' },
+    { value: 'link', label: 'Link' },
+    { value: 'lara', label: 'Lara Croft' },
+    { value: 'samus', label: 'Zero Suit Samus' }
   ];
 
   const playSound = (soundType: string) => {
@@ -23,18 +27,16 @@ const MTGHPTracker = () => {
   
   const increaseHP = () => {
     setHP(prev => prev + 1);
-    // replace console.log with "life" sound
     playSound('heal');
   };
 
   const decreaseHP = () => {
     setHP(prev => Math.max(0, prev - 1)); // Prevent negative HP
-    // replace console.log with "dsmage" sound
     playSound('damage');
   };
 
   return (
-    <div className="min-h-screen min-w-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
+    <div className="min-h-screen w-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
       <div className="bg-black/40 backdrop-blur-sm rounded-2xl border border-purple-500/30 p-8 shadow-2xl">
         <div className="flex items-center justify-center gap-8">
           {/* Voice Selector */}
